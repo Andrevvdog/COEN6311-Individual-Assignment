@@ -1,9 +1,9 @@
 
 # #后台管理子路由文件
 from django.urls import path
-from attendees.views import attendees
-from conference.views import conference
-from events.views import events
+from attendees import views as attendees
+from conference import views as conference
+from events import views as events
 
 urlpatterns = [
     path('<int:pIndex>', attendees.index, name = "attendees_index"),
