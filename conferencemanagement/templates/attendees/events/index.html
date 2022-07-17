@@ -2,40 +2,39 @@
 {% load static from static %}
 
 {% block main_body %}
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        会员管理
-        <small>订餐系统后台管理</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">会员管理</li>
-      </ol>
-    </section>
 
     <section class="content container-fluid">
 
-      <div class="row">
+      <div class="row navbar-static-right">
         <div class="col-xs-12">
           <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">店铺信息表</h3>
-    
-              <div class="box-tools">
-                <form action="{% url 'attendees_events_index' 1 %}" method="get">
-                    <div class="input-group input-group-sm" style="width:150px;">
-                      <input type="text" name="keyword" class="form-control pull-right" placeholder="店铺名称">
-    
-                      <div class="input-group-btn">
-                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                      </div>
-                    </div>
-                </form>
-              </div>
-            </div>
             <!-- /.box-header -->
-            <div class="box-body table-responsive no-padding">
+            <div class="box-body table-responsive no-padding main">
+              <section class="content-header">
+                <h1>
+                  Conference Registration
+                  <small>Conference Manament System</small>
+                </h1>
+              </section>
+              <div class="box-header">
+                <h3 class="box-title">Events Details</h3>
+      
+                <div class="box-tools pull-right">
+                  <form action="{% url 'attendees_events_index' 1 %}" method="get">
+                      <div class="input-group input-group-sm" style="width:200px;">
+                        <input type="text" name="keyword" class="form-control pull-right" placeholder="Name/Room/Date">
+      
+                        <div class="input-group-btn">
+                          <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                          <a type="button" href="{% url 'attendees_index' 1 %}" class="btn btn-default ion-home"></a>
+                        </div>
+                        
+
+                      </div>
+                  </form>
+                </div>
+                
+              </div>
               <table class="table table-hover">
                 <tr>
                   <th>ID</th>
@@ -58,17 +57,17 @@
                 </tr>
                 {% endfor %}
               </table>
+              <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                  <li><a href="{% url 'attendees_events_index' pIndex|add:-1 %}?{{mywhere|join:'&'}}">&laquo;</a></li>
+                  {% for p in plist %}
+                  <li {% if p == pIndex %}class="active"{% endif %}><a href="{% url 'attendees_events_index' p %}?{{mywhere|join:'&'}}">{{p}}</a></li>
+                  {% endfor %}
+                  <li><a href="{% url 'attendees_events_index' pIndex|add:1 %}?{{mywhere|join:'&'}}">&raquo;</a></li>
+                </ul>
+              </div>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <ul class="pagination pagination-sm no-margin pull-right">
-                <li><a href="{% url 'attendees_events_index' pIndex|add:-1 %}?{{mywhere|join:'&'}}">&laquo;</a></li>
-                {% for p in plist %}
-                <li {% if p == pIndex %}class="active"{% endif %}><a href="{% url 'attendees_events_index' p %}?{{mywhere|join:'&'}}">{{p}}</a></li>
-                {% endfor %}
-                <li><a href="{% url 'attendees_events_index' pIndex|add:1 %}?{{mywhere|join:'&'}}">&raquo;</a></li>
-              </ul>
-            </div>
           </div>
           <!-- /.box -->
         </div>
