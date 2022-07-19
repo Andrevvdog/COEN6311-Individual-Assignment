@@ -1,5 +1,3 @@
-
-# #后台管理子路由文件
 from django.urls import path
 from attendees import views as attendees
 from conference import views as conference

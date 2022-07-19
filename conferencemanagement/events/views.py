@@ -10,7 +10,6 @@ from datetime import datetime
 import time
 
 def index(request, pIndex=1):
-    '''浏览信息'''
     cid = request.GET.get("cid",1)
     conf = Conference.objects.filter(id=cid,attendees=(Attendees.objects.get(name=(request.session['attendeeuser']['id'])).id))
 
@@ -18,10 +17,9 @@ def index(request, pIndex=1):
         cmod = Events.objects
         clist = cmod.filter(conference_id=cid)
         mywhere = []
-        #获取并判断搜索条件
         kw = request.GET.get("keyword",None)
         if kw:
-            clist = clist.filter(Q(name__contains=kw) | Q(start_time__contains=kw) | Q(start_time__contains=kw))
+            clist = clist.filter(Q(name__contains=kw) | Q(start_time__contains=kw) | Q(end_time__contains=kw) | Q(room__contains=kw))
             mywhere.append('keyword='+kw)
         
         clist = clist.order_by("id")

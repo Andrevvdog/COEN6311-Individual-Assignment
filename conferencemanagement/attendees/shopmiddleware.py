@@ -1,4 +1,3 @@
-#执行登录判断
 from django.shortcuts import redirect
 from django.urls import reverse
 import re
@@ -7,13 +6,13 @@ class ShopMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
         # One-time configuration and initialization.
-        print("ShopMiddleWare")#在cmd里会被激发
+        print("ShopMiddleWare")
 
     def __call__(self, request):
         # Code to be executed for each request before
         # the view (and later middleware) are called.
         path = request.path
-        print("url: ", path)#在cmd里会被激发
+        print("url: ", path)
 
         #管理后台是否登录
         urllist = ['/attendees/login', '/attendees/dologin', '/attendees/logout']

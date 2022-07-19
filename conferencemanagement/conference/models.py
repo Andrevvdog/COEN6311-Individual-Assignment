@@ -14,4 +14,4 @@ class Conference(models.Model):
         return {'id':self.id,'name':self.name,'location':self.location,'attendees':self.attendees,'start_time':self.start_time.strftime('%Y-%m-%d %H:%M:%S'),'end_time':self.end_time.strftime('%Y-%m-%d %H:%M:%S')}
 
     class Meta:
-        db_table = "conference"  # 更改表名
+        db_table = "conference" 
