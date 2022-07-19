@@ -10,10 +10,9 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 
 def index(request, pIndex=1):
-    '''浏览信息'''
+    
     clist = Conference.objects
     mywhere = []
-    #获取并判断搜索条件
     kw = request.GET.get("keyword",None)
     if kw:
         clist = clist.filter(Q(name__contains=kw) | Q(start_time__contains=kw) | Q(end_time__contains=kw) | Q(location__contains=kw))
