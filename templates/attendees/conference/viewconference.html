@@ -1,0 +1,94 @@
+{% extends 'attendees/base.html' %}
+{% block main_body %}
+<!-- Content Header (Page header) -->
+
+<!-- Main content -->
+<section class="content container-fluid">
+
+  <div class="row navbar-static-right">
+    <div class="col-xs-12">
+      <div class="box">
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding main">
+          <section class="content-header">
+            <h1>
+              Conference Registration
+              <small>Conference Manament System</small>
+            </h1>
+          </section>
+          <div class="box-header">
+            <h3 class="box-title">Incoming Conference</h3>
+  
+            <div class="box-tools">
+              <form action="{% url 'attendees_conference_viewconference' 1 %}" method="get">
+                  <div class="input-group input-group-sm">
+                    <div class="input-group-btn">
+                      <button type="submit" name="keyword" value="Monday" class="btn btn-default" style="width:100px;">Monday</button>
+                      <button type="submit" name="keyword" value="Tuesday" class="btn btn-default" style="width:100px;">Tuesday</button>
+                      <button type="submit" name="keyword" value="Wednesday" class="btn btn-default" style="width:100px;">Wednesday</button>
+                      <button type="submit" name="keyword" value="Thursday" class="btn btn-default" style="width:100px;">Thursday</button>
+                      <button type="submit" name="keyword" value="Friday" class="btn btn-default" style="width:100px;">Friday</button>
+                      <button type="submit" name="keyword" value="Saturday" class="btn btn-default" style="width:100px;">Saturday</button>
+                      <button type="submit" name="keyword" value="Sunday" class="btn btn-default" style="width:100px;">Sunday</button>&nbsp;&nbsp;
+
+                      <button type="submit" class="btn btn-default ion-arrow-return-left" style="float:right;margin-right:0px;"></button>
+
+                      <button type="submit" name="keyword" value="Mcgill University" class="btn btn-default" style="float:right;margin-right:0px;">Mcgill University</button>
+                      <button type="submit" name="keyword" value="Concordia University" class="btn btn-default" style="float:right;margin-right:0px;">Concordia University</button>
+                    </div>
+                  </div>
+              </form>
+            </div>
+          </div>
+          <table class="table table-hover">
+            <tr>
+              <th>ID</th>
+              <th>Conference</th>
+              <th>Location</th>
+              <th>Attendees</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Operation</th>
+            </tr>
+            {% for vo in conferencelist %}
+            <tr>
+              <td>{{ vo.id }}</td>
+              <td>{{ vo.name }}</td>
+              <td>{{ vo.location }}</td>
+              <td>
+                {% for po in vo.attendeename %}
+                {{ po }}
+                {% endfor %}
+              </td>
+              <td>{{ vo.start_time }}</td>
+              <td>{{ vo.end_time }}</td>
+              <td>
+                  <a type="button" href="{% url 'attendees_conference_register' vo.id %}" class="btn btn-warning btn-xs">
+                    <span class="glyphicon" aria-hidden="true"></span> Register</a>
+                  <a type="button" href="{% url 'attendees_events_viewevents' 1 %}?cid={{vo.id}}" class="btn btn-success btn-xs">
+                    <span class="glyphicon" aria-hidden="true"></span> Details</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </table>
+          <div class="box-footer clearfix">
+            <ul class="pagination pagination-sm no-margin pull-right ">
+              <li><a href="{% url 'attendees_conference_viewconference' pIndex|add:-1 %}?{{mywhere|join:'&'}}">&laquo;</a></li>
+              {% for p in plist %}
+              <li {% if p == pIndex %}class="active"{% endif %}><a href="{% url 'attendees_conference_viewconference' p %}?{{mywhere|join:'&'}}">{{p}}</a></li>
+              {% endfor %}
+              <li><a href="{% url 'attendees_conference_viewconference' pIndex|add:1 %}?{{mywhere|join:'&'}}">&raquo;</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- /.box-body -->
+        
+      </div>
+      <!-- /.box -->
+    </div>
+  </div>
+  
+</section>
+<!-- /.content -->
+{% endblock %}
