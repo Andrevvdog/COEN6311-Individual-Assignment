@@ -11,7 +11,7 @@ class Conference(models.Model):
     end_date = models.CharField(max_length=50)
 
     def toDict(self):
-        return {'id':self.id,'name':self.name,'location':self.location,'attendees':self.attendees,'start_date':self.start_date,'end_time':self.end_date}
+        return {'id':self.id,'name':self.name,'location':self.location,'attendees':self.attendees,'start_date':self.start_date,'end_date':self.end_date}
 
     class Meta:
         db_table = "conference" 
