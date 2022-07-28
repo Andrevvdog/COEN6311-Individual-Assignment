@@ -28,7 +28,7 @@ def viewevents(request, pIndex = 1):
         return render(request, "attendees/info.html",context)
 
     
-    conf = Conference.objects.filter(id=cid,attendees=(Attendees.objects.get(name=(request.session['attendeeuser']['id'])).id))
+    conf = Conference.objects.filter(id=cid,attendees=(Attendees.objects.get(name=(request.session['attendeeuser']['name'])).id))
 
     if len(conf) != 0:
         events = Events.objects

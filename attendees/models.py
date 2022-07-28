@@ -7,7 +7,7 @@ class Attendees(models.Model):
     stuid = models.CharField(max_length = 255) 
 
     def toDict(self):
-        return {'id':self.name,'stuid':self.stuid}
+        return {'id':self.id,'name':self.name,'stuid':self.stuid}
 
     class Meta:
         db_table = "attendees"

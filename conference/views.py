@@ -52,7 +52,7 @@ def viewconference(request, pIndex = 1):
 def register(request, cid = 0):
     try:
         conference = Conference.objects.get(id=cid)
-        attendees = Attendees.objects.get(name=(request.session['attendeeuser']['id']))
+        attendees = Attendees.objects.get(name=(request.session['attendeeuser']['name']))
 
         conference.attendees.add(attendees)
         context = {'info':"Registered Successfully!"}
