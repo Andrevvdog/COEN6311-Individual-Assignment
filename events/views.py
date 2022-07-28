@@ -9,7 +9,7 @@ from django.db.models import Q
 from datetime import datetime
 import time
 
-def viewevents(request, pIndex=1):
+def viewevents(request, pIndex = 1):
     cid = request.GET.get("cid",0)
 
     print(request.session['cid']) #Store the current conference id into the session in case that cid = 0 when filtering

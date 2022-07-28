@@ -9,7 +9,7 @@ from django.db.models import Q
 from datetime import datetime
 import time
 
-def viewconference(request, pIndex=1):
+def viewconference(request, pIndex = 1):
     conference = Conference.objects
 
     mywhere = []
