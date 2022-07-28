@@ -31,31 +31,40 @@ def viewevents(request, pIndex=1):
     conf = Conference.objects.filter(id=cid,attendees=(Attendees.objects.get(name=(request.session['attendeeuser']['id'])).id))
 
     if len(conf) != 0:
-        cmod = Events.objects
-        clist = cmod.filter(conference_id=cid)
+        events = Events.objects
+        events = events.filter(conference_id=cid)
         mywhere = []
         keyword = request.GET.get("keyword",None)
         if keyword:
-            clist = clist.filter(Q(name__contains=keyword) | Q(start_time__contains=keyword) | Q(end_time__contains=keyword) | Q(room__contains=keyword))
+            events = events.filter(Q(start_date__contains=keyword) | Q(room__contains=keyword))
             mywhere.append('keyword='+keyword)
         
-        clist = clist.order_by("id")
+        events = events.order_by("id")
+        datelist = []
+        roomlist = []
+
+        for vo in events:
+            if vo.start_date not in datelist:
+                datelist.append(vo.start_date)
+            if vo.room not in roomlist:
+                roomlist.append(vo.room)
+
         #Insert Pages
         pIndex = int(pIndex)
-        page = Paginator(clist, 5)#5 conference per page
+        page = Paginator(events, 5)#5 conference per page
         maxpages = page.num_pages
         if pIndex > maxpages:
             pIndex = maxpages
         if pIndex < 1:
             pIndex = 1
-        list = page.page(pIndex)
-        plist = page.page_range
+        eventslist = page.page(pIndex)
+        pagelist = page.page_range
 
-        for vo in list:
+        for vo in eventslist:
             cob = Conference.objects.get(id=vo.conference_id)
             vo.conferencename = cob.name
 
-        context = {"eventslist":list, 'plist':plist,'pIndex':pIndex,'maxpages':maxpages,'mywhere':mywhere}
+        context = {"eventslist":eventslist,'datelist':datelist,'roomlist':roomlist,'pagelist':pagelist,'pIndex':pIndex,'maxpages':maxpages,'mywhere':mywhere}
         
         return render(request, "attendees/events/viewevents.html",context)
     

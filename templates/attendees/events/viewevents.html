@@ -13,7 +13,7 @@
               <section class="content-header">
                 <h1>
                   Conference Registration
-                  <small>Conference Manament System</small>
+                  <small>Conference Management System</small>
                 </h1>
               </section>
               <div class="box-header">
@@ -23,19 +23,15 @@
                   <form action="{% url 'attendees_events_viewevents' 1 %}" method="get">
                       <div class="input-group input-group-sm">
                         <div class="input-group-btn">
-                          <button type="submit" name="keyword" value="Monday" class="btn btn-default" style="width:100px;">Monday</button>
-                          <button type="submit" name="keyword" value="Tuesday" class="btn btn-default" style="width:100px;">Tuesday</button>
-                          <button type="submit" name="keyword" value="Wednesday" class="btn btn-default" style="width:100px;">Wednesday</button>
-                          <button type="submit" name="keyword" value="Thursday" class="btn btn-default" style="width:100px;">Thursday</button>
-                          <button type="submit" name="keyword" value="Friday" class="btn btn-default" style="width:100px;">Friday</button>
-                          <button type="submit" name="keyword" value="Saturday" class="btn btn-default" style="width:100px;">Saturday</button>
-                          <button type="submit" name="keyword" value="Sunday" class="btn btn-default" style="width:100px;">Sunday</button>&nbsp;&nbsp;
+                          {% for vo in datelist %}
+                          <button type="submit" name="keyword" value="{{vo}}" class="btn btn-default" style="width:100px;">{{vo}}</button>
+                          {% endfor %}
 
                           <a type="button" href="{% url 'attendees_conference_viewconference' 1 %}" class="btn btn-default ion-home" style="float:right;margin-right:0px;"></a>
                           <button type="submit" class="btn btn-default ion-arrow-return-left" style="float:right;margin-right:0px;"></button>
-                          <button type="submit" name="keyword" value="EV5.180" class="btn btn-default" style="float:right;margin-right:0px;">EV5.180</button>
-                          <button type="submit" name="keyword" value="EV5.179" class="btn btn-default" style="float:right;margin-right:0px;">EV5.179</button>
-                          
+                          {% for vo in roomlist %}
+                          <button type="submit" name="keyword" value="{{vo}}" class="btn btn-default" style="float:right;margin-right:0px;">{{vo}}</button>
+                          {% endfor %}
                         </div>
                         
 
@@ -69,7 +65,7 @@
               <div class="box-footer clearfix">
                 <ul class="pagination pagination-sm no-margin pull-right">
                   <li><a href="{% url 'attendees_events_viewevents' pIndex|add:-1 %}?{{mywhere|join:'&'}}">&laquo;</a></li>
-                  {% for p in plist %}
+                  {% for p in pagelist %}
                   <li {% if p == pIndex %}class="active"{% endif %}><a href="{% url 'attendees_events_viewevents' p %}?{{mywhere|join:'&'}}">{{p}}</a></li>
                   {% endfor %}
                   <li><a href="{% url 'attendees_events_viewevents' pIndex|add:1 %}?{{mywhere|join:'&'}}">&raquo;</a></li>

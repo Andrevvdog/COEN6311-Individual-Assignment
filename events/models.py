@@ -11,9 +11,11 @@ class Events(models.Model):
     speaker = models.CharField(max_length=50)
     start_time = models.CharField(max_length=50)
     end_time = models.CharField(max_length=50)
+    start_date = models.CharField(max_length=50)
+    end_date = models.CharField(max_length=50)
 
     def toDict(self):
-        return {'id':self.id, 'conference_id': self.conference,'name':self.name,'room':self.room,'speaker':self.speaker,'start_time':self.start_time,'end_time':self.end_time}
+        return {'id':self.id, 'conference_id': self.conference,'name':self.name,'room':self.room,'speaker':self.speaker,'start_time':self.start_time,'end_time':self.end_time,'start_date':self.start_date,'end_time':self.end_date}
     
     class Meta:
         db_table = "events"
