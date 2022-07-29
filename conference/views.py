@@ -41,7 +41,7 @@ def viewconference(request, pIndex = 1):
     for vo in conferencelist:
         attendeelist = []
 
-        for ao in Conference.objects.all()[vo.id - 1].attendees.all():
+        for ao in vo.attendees.all():
             attendeelist.append(ao.name)
         vo.attendeename = attendeelist
 
